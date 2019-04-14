@@ -21,6 +21,10 @@ export class SlideDeckSlide extends React.Component<ISlideDeckSlideProps> {
 				fontSize: "4em",
 				textAlign: "center"
 			},
+			references: {
+				bottom: 0,
+				position: "fixed"
+			},
 			subHeading: {
 				fontSize: "2em",
 				textAlign: "center"
@@ -87,7 +91,7 @@ export class SlideDeckSlide extends React.Component<ISlideDeckSlideProps> {
 		}
 
 		return (
-			<ol>
+			<ol style={ this.styles.references }>
 				{ references.map(this.renderReferenceLink) }
 			</ol>
 		);

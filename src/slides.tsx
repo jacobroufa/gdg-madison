@@ -11,10 +11,14 @@ export default [
 	  "JS super-set",
 	  "static typechecker/linter",
 	  "removes many bugs before they arise"
+	],
+	references: [
+	  "https://www.typescriptlang.org",
+	  "https://www.typescriptlang.org/docs/handbook/compiler-options.html"
 	]
   },
   {
-	title: "Why TypeScript?",
+	title: "TypeScript + Google?",
 	content: [
 	  "Evan Martin, Google developer on the Chrome project",
 	  "The first part of our bridge from the Google JavaScript Galapagos back to the mainland was adopting a well-supported static checker that is (1) not home-grown; (2) popular already, while similar to our existing code; (3) designed to bridge into JavaScript; (4) designed to support the large-scale development that motivated our custom tools in the first place. And that tool is TypeScript.",
@@ -27,6 +31,9 @@ export default [
 	subtitle: "¯\\_(ツ)_/¯",
 	content: [
 	  "React is competent framework with a lightweight API and useful, recognizable templating in JSX"
+	],
+	references: [
+	  "https://reactjs.org/"
 	]
   },
   {

@@ -1,6 +1,6 @@
 import React from "react";
 
-export enum keys { DOWN = 40, LEFT = 37, RIGHT = 39, SPACE = 32 };
+export enum keys { DOWN = 40, LEFT = 37, RIGHT = 39, SPACE = 32, UP = 38 };
 
 export interface CustomCSS {
 	[key: string]: React.CSSProperties;

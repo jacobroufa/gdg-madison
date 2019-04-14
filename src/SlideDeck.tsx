@@ -19,6 +19,7 @@ export class SlideDeck extends React.Component<ISlideDeckProps, ISlideDeckState>
 		this.navigate = this.navigate.bind(this);
 		this.renderChild = this.renderChild.bind(this);
 		this.setContainer = this.setContainer.bind(this);
+		this.setContentIndex = this.setContentIndex.bind(this);
 	}
 
 	_container: HTMLDivElement | null;
@@ -82,7 +83,10 @@ export class SlideDeck extends React.Component<ISlideDeckProps, ISlideDeckState>
 				break;
 			case (keys.DOWN):
 			case (keys.SPACE):
-				this.setContentIndex();
+				this.setContentIndex(false);
+				break;
+			case (keys.UP):
+				this.setContentIndex(false, true);
 				break;
 			default:
 				console.log(key)
@@ -94,8 +98,16 @@ export class SlideDeck extends React.Component<ISlideDeckProps, ISlideDeckState>
 		this._container = div;
 	}
 
-	setContentIndex(reset?: boolean) {
-		const contentIndex = reset ? 0 : this.state.contentIndex + 1;
+	setContentIndex(reset: boolean, back?: boolean) {
+		let contentIndex = this.state.contentIndex + 1;
+
+		if (back) {
+			contentIndex = this.state.contentIndex - 1;
+		}
+
+		if (reset || contentIndex < 0) {
+			contentIndex = 0;
+		}
 
 		this.setState(() => ({ contentIndex }));
 	}
