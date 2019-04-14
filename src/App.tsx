@@ -18,7 +18,7 @@ export class App extends React.Component {
     return (
       <SlideDeckSlide
 	index={ index }
-	key={ slide.title }
+	key={ slide.title + index }
 	slide={ slide }
       />
     );

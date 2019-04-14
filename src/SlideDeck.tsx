@@ -8,6 +8,7 @@ export class SlideDeck extends React.Component<ISlideDeckProps, ISlideDeckState>
 		super(props);
 
 		this.state = {
+			contentIndex: 0,
 			index: 0
 		};
 
@@ -38,13 +39,16 @@ export class SlideDeck extends React.Component<ISlideDeckProps, ISlideDeckState>
 		);
 	}
 
-	renderChild(child: React.ReactNode, index: number) {
+	renderChild(child: React.ReactNode, idx: number) {
 		if (!child) {
 			return null;
 		}
 
+		const { contentIndex, index } = this.state;
+
 		return React.cloneElement(child as React.ReactElement<any>, {
-			isActive: index === this.state.index
+			contentIndex: contentIndex,
+			isActive: idx === index
 		});
 	}
 
@@ -52,7 +56,7 @@ export class SlideDeck extends React.Component<ISlideDeckProps, ISlideDeckState>
 		const index = this.state.index - 1;
 
 		if (index >= 0) {
-			this.setState(() => ({ index }));
+			this.setState(() => ({ index }), () => this.setContentIndex(true));
 		}
 	}
 
@@ -60,7 +64,7 @@ export class SlideDeck extends React.Component<ISlideDeckProps, ISlideDeckState>
 		const index = this.state.index + 1;
 
 		if (index < this.props.children.length) {
-			this.setState(() => ({ index }));
+			this.setState(() => ({ index }), () => this.setContentIndex(true));
 		}
 	}
 
@@ -69,15 +73,31 @@ export class SlideDeck extends React.Component<ISlideDeckProps, ISlideDeckState>
 
 		const key = event.keyCode;
 
-		if (key === keys.LEFT) {
-			this.goBack();
-		} else if (key === keys.RIGHT) {
-			this.goForward();
+		switch (key) {
+			case (keys.LEFT):
+				this.goBack();
+				break;
+			case (keys.RIGHT):
+				this.goForward();
+				break;
+			case (keys.DOWN):
+			case (keys.SPACE):
+				this.setContentIndex();
+				break;
+			default:
+				console.log(key)
+				break;
 		}
 	}
 
 	setContainer(div: HTMLDivElement) {
 		this._container = div;
+	}
+
+	setContentIndex(reset?: boolean) {
+		const contentIndex = reset ? 0 : this.state.contentIndex + 1;
+
+		this.setState(() => ({ contentIndex }));
 	}
 }
 

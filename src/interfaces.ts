@@ -1,6 +1,6 @@
 import React from "react";
 
-export enum keys { LEFT = 37, RIGHT = 39 };
+export enum keys { DOWN = 40, LEFT = 37, RIGHT = 39, SPACE = 32 };
 
 export interface CustomCSS {
 	[key: string]: React.CSSProperties;
@@ -9,7 +9,8 @@ export interface CustomCSS {
 export interface ISlide {
 	title: string;
 	subtitle?: string;
-	content?: React.ReactNode;
+	content?: (string | React.ReactNode)[];
+	references?: string[];
 }
 
 export interface ISlideDeckProps {
@@ -17,10 +18,12 @@ export interface ISlideDeckProps {
 }
 
 export interface ISlideDeckState {
+	contentIndex: number;
 	index: number;
 }
 
 export interface ISlideDeckSlideProps {
+	contentIndex?: number;
 	index: number;
 	isActive?: boolean;
 	slide: ISlide;
